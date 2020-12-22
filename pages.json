@@ -59,7 +59,9 @@
         }
         ,{
             "path" : "pages/user/agent/agent",
-            "style" : {}
+            "style" : {
+				"app-plus":{"titleNView": false}
+			}
         }
         ,{
             "path" : "pages/user/fenxiao/fenxiao",
@@ -302,6 +304,52 @@
         }
         ,{
             "path" : "pages/user/qrcode/qrcode",
+            "style" : {
+				"app-plus":{"titleNView": false}
+			}
+        }
+        ,{
+            "path" : "pages/user/loan/loan",
+            "style" : {
+				"app-plus":{"titleNView": false}
+			}
+        }
+        ,{
+            "path" : "pages/user/manage/manage",
+            "style" : {
+				"app-plus":{"titleNView": false}
+			}
+        }
+        ,{
+            "path" : "pages/user/refundApply/refundApply",
+            "style" : {
+				"app-plus":{"titleNView": false}
+			}
+        }
+        ,{
+            "path" : "components/uni-searchbar/uni-searchbar",
+            "style" : {}
+        }
+        ,{
+            "path" : "pages/user/market/market",
+            "style" : {
+				"app-plus":{"titleNView": false}
+			}
+        },
+		{
+		    "path" : "pages/user/market/cardroll",
+		    "style" : {
+				"app-plus":{"titleNView": false}
+			}
+		}
+        ,{
+            "path" : "pages/user/market/discount",
+            "style" : {
+				"app-plus":{"titleNView": false}
+			}
+        }
+        ,{
+            "path" : "pages/user/market/full-reduction",
             "style" : {
 				"app-plus":{"titleNView": false}
 			}

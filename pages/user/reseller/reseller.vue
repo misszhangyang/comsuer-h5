@@ -125,7 +125,7 @@
 					{
 						title: '我要贷款',
 						img: require("@/imgs/yin2.png"),
-						url: "/pages/user/agent/agent",
+						url: "/pages/user/loan/loan",
 						detail: '查看贷款信息',
 						hotImg:'https://cdn.uviewui.com/uview/grid/hot6.png'
 						
@@ -133,14 +133,14 @@
 					{
 						title: '我要理财',
 						img: require("@/imgs/q.png"),
-						url: "/pages/user/mingxi/mingxi",
+						url: "/pages/user/manage/manage",
 						detail: '查看我的理财信息',
 						hotImg:'https://cdn.uviewui.com/uview/grid/hot6.png'
 					},
 					{
 						title: '退款审核',
 						img: require("@/imgs/tj.png"),
-						url: "/pages/user/agent/agent",
+						url: "/pages/user/refundApply/refundApply",
 						detail: '查看退款审核',
 						hotImg:'https://cdn.uviewui.com/uview/grid/hot6.png'
 						
@@ -148,7 +148,7 @@
 					{
 						title: '营销活动',
 						img: require("@/imgs/q.png"),
-						url: "/pages/user/mingxi/mingxi",
+						url: "/pages/user/market/market",
 						detail: '查看营销活动',
 						hotImg:'https://cdn.uviewui.com/uview/grid/hot5.png'
 					},

@@ -1,0 +1,81 @@
+<template>
+	<view class="agent">
+		<cu-custom bgColor="bg-gradual-blue" :isBack="true"><block slot="content">退款申请</block></cu-custom>
+		
+		<view class="t_tou">
+		<!-- 	<view class="example-body">
+				<uni-search-bar @confirm="search" @input="input" @cancel="cancel" />
+				<view class="search-result">
+					<text class="search-result-text">当前输入为：{{ searchVal }}</text>
+				</view>
+			</view> -->
+		</view>
+		<view class="t">
+		 <view class="example-body">
+		 	<uni-search-bar @confirm="search" style="width: 100%;" />
+		 	<!-- <view class="search-result">
+		 		<text class="search-result-text">当前输入为：{{ searchVal }}</text>
+		 	</view> -->
+		 </view>
+		</view>
+	</view>
+</template>
+
+<script>
+	export default {
+		data() {
+			return {
+				list:[1,2,3,4,5],
+				searchVal: ''
+			};
+		},
+		methods:{
+			search(res) {
+				uni.showToast({
+					title: '搜索：' + res.value,
+					icon: 'none'
+				})
+			},
+			input(res) {
+				this.searchVal = res.value
+			},
+			cancel(res) {
+				uni.showToast({
+					title: '点击取消，输入值为：' + res.value,
+					icon: 'none'
+				})
+			}
+		}
+	}
+</script>
+
+<style lang="less">
+.agent{
+	.head{background-color: #E0451D;color: #fff; margin-top: 45px; text-align: center;padding: 40px 10px 30px;}
+	.head span{font-size: 30px;padding: 0 5px;}
+	.t_tou{display: flex;padding: 10px;height: 30px;line-height: 30px;margin-bottom: 10px;}
+	.tou_1{width: 34%;text-align: center;}
+	.t_01{display: flex;height: 45px;line-height: 45px;}
+	.t_01_1{width: 34%;text-align: center;}
+	.t_01_1 img{width: 30px;height: 30px;border-radius: 30px;}
+	.t li:nth-of-type(odd){ background-color: #EEEEEE;} 
+	.t li:nth-of-type(even){background-color: #fff;} 
+	.example-body {
+		/* #ifndef APP-NVUE */
+		display: flex;
+		/* #endif */
+		flex-direction: row;
+		flex-wrap: wrap;
+		justify-content: center;
+		padding: 0;
+		font-size: 14px;
+		background-color: #ffffff;
+	}
+	.search-result {
+		margin-top: 10px;
+		margin-bottom: 20px;
+		text-align: center;
+	}
+
+}
+</style>
