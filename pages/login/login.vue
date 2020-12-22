@@ -101,7 +101,6 @@
 				})  
 			},
 			SetBorderSize(e){
-				debugger
 				// let dom = uni.createSelectorQuery().in(this).select(".radio")
 				// this.$api.$(".radio").css({"background":"red"})
 				alert("已经切换" + e.detail.value)

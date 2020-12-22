@@ -5,6 +5,10 @@ import './assets/style/border.css'
 import './assets/style/main.css'
 import $ from './assets/style/jquery.js'
 import http from './common/axios.js'  
+import uView from 'uview-ui';
+Vue.use(uView);
+
+
 import json from './json2' //测试用数据
 import cuCustom from './colorui/components/cu-custom.vue'  //菜单栏头部组件
 import addressPicker from './colorui/components/address-picker.vue'  //地址选择组件

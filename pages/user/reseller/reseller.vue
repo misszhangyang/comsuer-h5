@@ -40,34 +40,44 @@
 					
 					</view>
 					<view  style="width: 100%;height:15%;display: block;background:#FFFFFF;">
-						<view class="flex">
-							<view class=" padding-top  margin-xs ">
+						<view class="flex" style="height: 50px;">
+							<!-- <view class=" padding-top  margin-xs ">
 								 <img src="@/imgs/6.jpg" style="margin-left: 30%;">
-							</view>
+							</view> -->
 							<view class="flex-sub  padding-middle  margin-xs ">
-								<swiper class="swiper" vertical="true" autoplay="false" duration="500" interval="5000">
-										 <swiper-item v-for="(item, index) in msg" :key="index">
-											  <navigator :url="'/pages/user/notice/text?item='+ encodeURIComponent(JSON.stringify(item))">
+							<!-- 	<swiper class="swiper" vertical="true" autoplay="false" duration="500" interval="5000">
+										 <swiper-item v-for="(item, index) in msg" :key="index">
+											  <navigator   :url="'/pages/user/notice/text?item='+ encodeURIComponent(JSON.stringify(item))">
 											     <view>第{{item}}个会员充值成功</view>
 											  </navigator>
 										 </swiper-item>
-								 </swiper>
+								 </swiper> -->
+								<view class="u-demo-area">
+									<u-toast :type="type" ref="uToast"></u-toast>
+									<u-notice-bar :autoplay="autoplay" :playState="playState" :speed="speed" @getMore="getMore" 
+									:mode="mode"  @close="close" @click="click" :show="show" :type="type" :list="listText"
+									:moreIcon="moreIcon" :volumeIcon="volumeIcon" :duration="duration" :isCircular="isCircular"></u-notice-bar>
+								</view>
 							</view>
-							<view class="padding-top margin-xs">
+							<!-- <view class="padding-top margin-xs">
 								 <img src="@/imgs/6.jpg" style="float: right;margin-right: 30%;">
-							</view>
+							</view> -->
 						</view>
 					</view>
 				</view>
 		</view>
 		<view class="icon">
 			<view class="ico" v-for="item of list">
-				<navigator :url="item.url">
+				<navigator class="navigator" :url="item.url">
+					<image :src="item.hotImg" style="width: 44rpx;height: 44rpx;top:0;right:0;" class="badge-icon"></image>
 					<view class="tubiao">
 						<img class="img" :src="item.img"></img>
 					</view>
 					<view class="tt">
 						<view class="text">{{item.title}}</view>
+					</view>
+					<view class="tt1">
+						<view class="text text0">{{item.detail}}</view>
 					</view>
 				</navigator>
 			</view>
@@ -80,29 +90,118 @@
 	export default {
 		data() {
 			return {
-				msg:[
-					"1",
-					"2"
+				show: true,
+				autoplay: false,
+				type: 'warning',
+				listText: [
+					'锦瑟无端五十弦，一弦一柱思华年',
+					'庄生晓梦迷蝴蝶，望帝春心托杜鹃',
+					'沧海月明珠有泪，蓝田日暖玉生烟'
 				],
-				list: [{
-						title: '推广名片',
+				mode: 'vertical',
+				playState: 'play',
+				speed: 160,
+				duration: 2000,
+				moreIcon: true,
+				volumeIcon: true,
+				isCircular: true,
+				current: 0,
+				list: [
+					{
+						title: '订单收款',
 						img: require("@/imgs/mp.png"),
-						url: "/pages/user/spread/spread"
+						url: "/pages/user/qrcode/qrcode",
+						detail: '向客户展示收款码,客户扫码付款',
+						hotImg:'https://cdn.uviewui.com/uview/grid/hot6.png'
 					},
 					{
-						title: '推广人统计',
+						title: '智慧餐厅',
 						img: require("@/imgs/tj.png"),
-						url: "/pages/user/agent/agent"
+						url: "/pages/user/agent/agent",
+						detail: '查看智慧餐厅订单',
+						hotImg:'https://cdn.uviewui.com/uview/grid/hot6.png'
+						
 					},
 					{
-						title: '佣金明细',
+						title: '我要贷款',
+						img: require("@/imgs/yin2.png"),
+						url: "/pages/user/agent/agent",
+						detail: '查看贷款信息',
+						hotImg:'https://cdn.uviewui.com/uview/grid/hot6.png'
+						
+					},
+					{
+						title: '我要理财',
 						img: require("@/imgs/q.png"),
-						url: "/pages/user/mingxi/mingxi"
+						url: "/pages/user/mingxi/mingxi",
+						detail: '查看我的理财信息',
+						hotImg:'https://cdn.uviewui.com/uview/grid/hot6.png'
 					},
 					{
-						title: '推广排名',
+						title: '退款审核',
+						img: require("@/imgs/tj.png"),
+						url: "/pages/user/agent/agent",
+						detail: '查看退款审核',
+						hotImg:'https://cdn.uviewui.com/uview/grid/hot6.png'
+						
+					},
+					{
+						title: '营销活动',
+						img: require("@/imgs/q.png"),
+						url: "/pages/user/mingxi/mingxi",
+						detail: '查看营销活动',
+						hotImg:'https://cdn.uviewui.com/uview/grid/hot5.png'
+					},
+					{
+						title: '会员管理',
+						img: require("@/imgs/tj.png"),
+						url: "/pages/user/agent/agent",
+						detail: '查看会员管理',
+						hotImg:'https://cdn.uviewui.com/uview/grid/hot6.png'
+						
+					},
+					{
+						title: '员工管理',
+						img: require("@/imgs/q.png"),
+						url: "/pages/user/mingxi/mingxi",
+						detail: '查看员工管理',
+						hotImg:'https://cdn.uviewui.com/uview/grid/hot6.png'
+					},
+					{
+						title: '店铺信息',
+						img: require("@/imgs/tj.png"),
+						url: "/pages/user/agent/agent",
+						detail: '查看店铺信息',
+						hotImg:'https://cdn.uviewui.com/uview/grid/hot6.png'
+						
+					},
+					{
+						title: '经营分析',
+						img: require("@/imgs/q.png"),
+						url: "/pages/user/mingxi/mingxi",
+						detail: '查看经营分析',
+						hotImg:'https://cdn.uviewui.com/uview/grid/hot6.png'
+					},
+					{
+						title: '结算记录',
+						img: require("@/imgs/q.png"),
+						url: "/pages/user/mingxi/mingxi",
+						detail: '查看结算记录',
+						hotImg:'https://cdn.uviewui.com/uview/grid/hot5.png'
+					},
+					{
+						title: '云喇叭',
+						img: require("@/imgs/q.png"),
+						url: "/pages/user/mingxi/mingxi",
+						detail: '绑定和查询云喇叭',
+						hotImg:'https://cdn.uviewui.com/uview/grid/hot6.png'
+					},
+					{
+						title: '助农专区',
 						img: require("@/imgs/dd.png"),
-						url: "/pages/user/sort/sort"
+						url: "/pages/user/sort/sort",
+						detail: '助农服务',
+						hotImg:'https://cdn.uviewui.com/uview/grid/hot5.png'
 					},
 				]
 			}
@@ -112,6 +211,16 @@
 			jump_cash() {
 				uni.navigateTo({
 					url: '/pages/user/cash/cash',
+				});
+			},
+			click(e){
+				uni.navigateTo({
+					url: '/pages/user/notice/text?item='+ encodeURIComponent(JSON.stringify(e)),
+				});
+			},
+			getMore(){
+				uni.navigateTo({
+					url: '/pages/user/notice/text',
 				});
 			}
 		},
@@ -128,6 +237,9 @@
 		background-color: #F5F5F5;
 	}
 
+	.badge-icon {
+		float: right;
+	}
 	.reseller {
 		background-color: #F5F5F5;
 		min-height: 100vh;
@@ -177,6 +289,15 @@
 				.flex {
 					/* #ifndef APP-NVUE */
 					display: flex;
+					/* #endif */
+					flex-direction: row;
+					margin-left: 10%;
+				}
+				
+				.flex1{
+					/* #ifndef APP-NVUE */
+					display: flex;
+					height: 2%;
 					/* #endif */
 					flex-direction: row;
 					margin-left: 10%;
@@ -287,23 +408,32 @@
 			justify-content: space-between;
 			flex-wrap: wrap;
 
-			margin-left: 3%;
-			margin-right: 3%;
-			margin-top: 5%;
+			margin-left: 4.5%;
+			margin-right: 4.5%;
+			margin-top: 4%;
 
 			.ico {
 				border-radius: 10px;
 				border: 1px solid #C0C0C0;
-				width: 49%;
+				width: 48%;
+				font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+				color: #000;
 				height: 100px;
 				margin-top: 10px;
 				display: flex;
 				border: none;
+				
 				font-size: 15px;
 				flex-direction: column;
 				background-color: #FFFFFF;
+				
+				.navigator{
+					height: 100%;
+				}
 
 				.img {
+					float: left;
+					margin-left: 10%;
 					width: 32px;
 					height: 32px;
 				}
@@ -312,13 +442,30 @@
 					margin-top: 20px;
 					text-align: center;
 				}
+				
+				.tt{
+					width: 70%;
+					margin-left: 30%
+				}
+				
+				.tt1{
+					margin-left: 30%
+				}
 
 				.text {
-					color: #8F8F94;
+					color: hsl(0deg 3% 26% / 94%);
 					padding-top: 5px;
-					text-align: center;
-
+                    font-size: 0.95333rem;
+					float: left;
+					margin-left: 10%
 				}
+				
+				 .text0{
+					 color: #9B9B9B;
+					 font-size: 0.7rem;
+					 margin-left: 10%;
+					 line-height: 16px;
+				 }
 			}
 		}
 		
@@ -326,7 +473,7 @@
 		   margin-top: 3%;
 		   font-size: 13px;
 		   text-align: center;
-		   padding: auto 0;
+		   // padding: auto 0;
 		}
 		
 		
