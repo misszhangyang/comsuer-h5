@@ -60,14 +60,14 @@
 				<view class="time" >
 					<view class="biao_05_2"> 
 						<view class="uni-list-cell-db">
-							<picker mode="date" :value="date"  @change="bindTimeChange" style="margin-top: 6px;">
+							<picker mode="date" :value="date"  @change="bindDateChange" style="margin-top: 6px;">
 								<view class="uni-input timeColor">{{date}}</view>
 							</picker>
 						</view>
 					</view>
 					<view class="biao_05_2" style="margin: 10upx 10px 0 0;">--</view>
 					<view class="uni-list-cell-db">
-						<picker mode="date" :value="date_close"  @change="bindTimeChange_close" style="margin-top: 6px;">
+						<picker mode="date" :value="date_close"  @change="bindDateChange_close" style="margin-top: 6px;">
 							<view class="uni-input timeColor">{{date_close}}</view>
 						</picker>
 					</view>
@@ -234,6 +234,16 @@
 					console.log('value => '+ e.value);
 					//原始的Date对象
 					console.log('date => ' + e.date);
+				}
+			},
+			bindDateChange: function(e) {
+				this.date = e.target.value
+			},
+			bindDateChange_close: function(e) {
+				this.date_close = e.target.value
+				if(this.date_close < this.date){
+					alert("开始日期大于结束日期,请重新选择")
+					this.date_close = '结束时间'
 				}
 			},
 			bindTimeChange: function(e) {

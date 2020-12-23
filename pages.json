@@ -354,6 +354,24 @@
 				"app-plus":{"titleNView": false}
 			}
         }
+        ,{
+            "path" : "pages/user/member/member",
+            "style" : {
+				"app-plus":{"titleNView": false}
+			}
+        }
+        ,{
+            "path" : "pages/user/staffManage/staffManage",
+            "style" : {
+				"app-plus":{"titleNView": false}
+			}
+        }
+        ,{
+            "path" : "pages/user/staffManage/addSatff",
+            "style" : {
+				"app-plus":{"titleNView": false}
+			}
+        }
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",

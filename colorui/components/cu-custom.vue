@@ -9,7 +9,9 @@
 				<view class="content" :style="[{top:StatusBar + 'px'}]">
 					<slot name="content"></slot>
 				</view>
-				<slot name="right"></slot>
+				<button @click="cancel" class="right" :style="[{right: '10%'}]"></button>
+				<slot name="right">
+				</slot>
 			</view>
 		</view>
 	</view>
@@ -55,6 +57,12 @@
 				uni.navigateBack({
 					delta: 1
 				});
+			},
+			cancel(){
+				debugger
+				this.$emit("cancel", {
+					// value: this.searchVal
+				})
 			}
 		}
 	}

@@ -40,7 +40,7 @@
 					<!-- <input class="address-input"><address-picker  @change="change">{{address}}</address-picker></input> -->
 				</view>
 				<view class="input-item">
-					<text class="tit">详细地址<span style="color: red;">*</span></text>
+					<text class="tit">店铺地址<span style="color: red;">*</span></text>
 					<input 
 						type="mobile" 
 						value="" 

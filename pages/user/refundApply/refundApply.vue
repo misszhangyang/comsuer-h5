@@ -12,7 +12,7 @@
 		</view>
 		<view class="t">
 		 <view class="example-body">
-		 	<uni-search-bar @confirm="search" style="width: 100%;" />
+		 	<uni-search-bar @confirm="search" style="width: 100%;" @cancel="cancel" />
 		 	<!-- <view class="search-result">
 		 		<text class="search-result-text">当前输入为：{{ searchVal }}</text>
 		 	</view> -->
@@ -40,10 +40,11 @@
 				this.searchVal = res.value
 			},
 			cancel(res) {
-				uni.showToast({
-					title: '点击取消，输入值为：' + res.value,
-					icon: 'none'
-				})
+				alert("点击了搜索" + res)
+				// uni.showToast({
+				// 	title: '点击取消，输入值为：' + res.value,
+				// 	icon: 'none'
+				// })
 			}
 		}
 	}

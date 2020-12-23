@@ -90,12 +90,12 @@
 				}
 				if(this.current == 1){
 					uni.navigateTo({
-						url: '/pages/user/notice/text',
+						url: '/pages/user/market/discount',
 					});
 				}
 				if(this.current == 2){
 					uni.navigateTo({
-						url: '/pages/user/notice/text',
+						url: '/pages/user/market/full-reduction',
 					});
 				}
 			}

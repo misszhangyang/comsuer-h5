@@ -15,7 +15,7 @@
 				<uni-icons color="#999999" class="" size="24" type="clear" />
 			</view>
 		</view>
-		<text @click="cancel" class="uni-searchbar__cancel" v-if="cancelButton ==='always' || show && cancelButton ==='auto'">{{cancelText}}</text>
+		<button @click="cancel" class="uni-searchbar__cancel" v-if="cancelButton ==='always' || show && cancelButton ==='auto'">{{cancelText}}</button>
 	</view>
 </template>
 
@@ -68,7 +68,7 @@
 			},
 			cancelText: {
 				type: String,
-				default: '取消'
+				default: '搜索'
 			},
 			bgColor: {
 				type: String,

@@ -155,7 +155,7 @@
 					{
 						title: '会员管理',
 						img: require("@/imgs/tj.png"),
-						url: "/pages/user/agent/agent",
+						url: "/pages/user/member/member",
 						detail: '查看会员管理',
 						hotImg:'https://cdn.uviewui.com/uview/grid/hot6.png'
 						
@@ -163,7 +163,7 @@
 					{
 						title: '员工管理',
 						img: require("@/imgs/q.png"),
-						url: "/pages/user/mingxi/mingxi",
+						url: "/pages/user/staffManage/staffManage",
 						detail: '查看员工管理',
 						hotImg:'https://cdn.uviewui.com/uview/grid/hot6.png'
 					},
@@ -195,14 +195,7 @@
 						url: "/pages/user/mingxi/mingxi",
 						detail: '绑定和查询云喇叭',
 						hotImg:'https://cdn.uviewui.com/uview/grid/hot6.png'
-					},
-					{
-						title: '助农专区',
-						img: require("@/imgs/dd.png"),
-						url: "/pages/user/sort/sort",
-						detail: '助农服务',
-						hotImg:'https://cdn.uviewui.com/uview/grid/hot5.png'
-					},
+					}
 				]
 			}
 		},
