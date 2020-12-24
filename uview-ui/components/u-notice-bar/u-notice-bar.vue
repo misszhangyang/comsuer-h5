@@ -86,7 +86,9 @@ export default {
 			type: Array,
 			default() {
 				return [];
-			}
+			},
+			color: '#29b105',
+			
 		},
 		// 显示的主题，success|error|primary|info|warning
 		type: {

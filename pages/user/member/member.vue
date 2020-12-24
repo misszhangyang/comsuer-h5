@@ -28,14 +28,20 @@
 				<goodsFilter :filters="goodsFilters" @sortChanged="goodsFilterChanged" @shapeChanged="goodsTemplateChanged" :showShape="true" :shapeValue="2"></goodsFilter>
 			</view>
 		</view>
-		<view>
-			
+		<view style="height: 450px; overflow: auto;">
+			<!-- <uni-section title="圆头像且不显示分割线" type="line"></uni-section> -->
+			<uniList :border="false">
+				<uniListChat v-for="item in listData" :avatar-circle="true" :key="item.id" :title="item.author_name" :avatar="item.cover" :note="item.title" :time="item.published_at" :clickable="false"></uniListChat>
+			</uniList>
 		</view>
+		
 	</view>
 </template>
 
 <script>
 	import goodsFilter from '@/components/yb-filter/index.vue';
+	import uniListChat from '../../../components/uni/uni-list-chat/uni-list-chat.vue';
+	import uniList from '../../../components/uni/uni-list/uni-list.vue';
 	import utils from '@/common/utils.js';
 	export default {
 		data() {
@@ -48,6 +54,15 @@
 					'庄生晓梦迷蝴蝶，望帝春心托杜鹃',
 					'沧海月明珠有泪，蓝田日暖玉生烟'
 				],
+				UNITS: {
+					'年': 31557600000,
+					'月': 2629800000,
+					'天': 86400000,
+					'小时': 3600000,
+					'分钟': 60000,
+					'秒': 1000
+				},
+				pageIndex: '',
 				// 默认双列显示
 				goodsListTemplate: 2,
 				// 过滤参数
@@ -61,7 +76,18 @@
 				volumeIcon: true,
 				isCircular: true,
 				current: 0,
+				listData: [],
+				avatarList: [{
+					url: '/static/logo.png'
+				}, {
+					url: '/static/logo.png'
+				}, {
+					url: '/static/logo.png'
+				}]
 			}
+		},
+		onLoad() {
+			this.getList()
 		},
 		computed: {
 			goodsListTemplateType: function() {
@@ -86,19 +112,87 @@
 				{title:'价格',value:5,filterType:1, initAscState:true}]
 			}
 		},
-		components: {goodsFilter},
+		components: {goodsFilter,uniListChat,uniList},
 		methods: {
+			getList() {
+				var data = {
+					column: 'id,post_id,title,author_name,cover,published_at' //需要的字段名
+				};
+			
+				uni.request({
+					url: 'https://unidemo.dcloud.net.cn/api/news',
+					data: data,
+					success: data => {
+						if (data.statusCode == 200) {
+							let list = this.setTime(data.data);
+							list = this.reload ? list : this.listData.concat(list);
+							list.map(item => {
+								item.text = Math.floor(Math.random() * (1 - 20) + 20)
+								return item
+							})
+							this.listData = this.getRandomArrayElements(list, 10)
+						}
+					},
+					fail: (data, code) => {
+						console.log('fail' + JSON.stringify(data));
+					}
+				});
+			},
+			getRandomArrayElements(arr, count) {
+				var shuffled = arr.slice(0),
+					i = arr.length,
+					min = i - count,
+					temp, index;
+				while (i-- > min) {
+					index = Math.floor((i + 1) * Math.random());
+					temp = shuffled[index];
+					shuffled[index] = shuffled[i];
+					shuffled[i] = temp;
+				}
+				return shuffled.slice(min);
+			},
+			setTime(items) {
+				var newItems = [];
+				items.forEach(e => {
+					newItems.push({
+						author_name: e.author_name,
+						cover: e.cover,
+						id: e.id,
+						post_id: e.post_id,
+						published_at: this.format(e.published_at),
+						title: e.title
+					});
+				});
+				return newItems;
+			},
+			format(dateStr) {
+				var date = this.parse(dateStr)
+				var diff = Date.now() - date.getTime();
+				if (diff < this.UNITS['天']) {
+					return this.humanize(diff);
+				}
+				var _format = function(number) {
+					return (number < 10 ? ('0' + number) : number);
+				};
+				return date.getFullYear() + '-' + _format(date.getMonth() + 1) + '-' + _format(date.getDate()) + ' ' +
+					_format(date.getHours()) + ':' + _format(date.getMinutes());
+			},
+			parse(str) { //将"yyyy-mm-dd HH:MM:ss"格式的字符串，转化为一个Date对象
+				var a = str.split(/[^0-9]/);
+				return new Date(a[0], a[1] - 1, a[2], a[3], a[4], a[5]);
+			},
 			// 排序，筛选更改
 			goodsFilterChanged(filter){
+				debugger
 				console.log("filter:",filter)
 				// 此处可根据fitler数据，从服务器端加载数据
-				// pageIndex = 0;
-				// this.isEnd = false;
-				// this.loadingType = 0;
-				// this.curCateFid=filter.option || ""
-				// // 加载数据
-				// const resetData=true;
-				// this.loadMoreGoods(filter,resetData);
+				pageIndex = 0;
+				this.isEnd = false;
+				this.loadingType = 0;
+				this.curCateFid=filter.option || ""
+				// 加载数据
+				const resetData=true;
+				this.loadMoreGoods(filter,resetData);
 			}
 			// 点击了右侧的模板选择按钮：即单列还是双列展示商品
 			,goodsTemplateChanged(templateValue){
@@ -139,6 +233,9 @@
 	}
 	.sort-header{
 		width: 100%;
+	}
+	.list{
+		overflow: auto;
 	}
 	.reseller {
 		background-color: #F5F5F5;
@@ -311,8 +408,8 @@
 			display: flex;
 			justify-content: space-between;
 			flex-wrap: wrap;
-			height: 60px;
-			background: #007AFF;
+			height: 50px;
+			background: #fff;
 
          
 			// margin-left: 4.5%;

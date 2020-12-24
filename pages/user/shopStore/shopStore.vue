@@ -1,77 +1,105 @@
 <template>
 	<view class="shop">
-		<cu-custom bgColor="bg-gradual-blue" :isBack="true"><block slot="content">新增员工</block></cu-custom>
+		<cu-custom bgColor="bg-gradual-blue" :isBack="true"><block slot="content">店铺信息</block>
+		<button  slot="right" style="background: transparent; color: #fff; margin-right: 3%;" @click="addCancel">编辑</button>
+		</cu-custom>
 		<!-- <view class="biao" style="margin-top: 55px;"> -->
 			 <view class="cu-form-group1">
 				<!-- <view class="title">店铺名称：</view>
 				<view class="title" style="flex-grow: 1;">{{content.shop_name}}</view> -->
 			</view>
-			<view class="cu-form-group ">
-				<view class="title"><span style="color: red;padding-right: 5px;">*</span> 姓名：</view>
-				<input name="input" v-model="list.amout"></input>
+			<view class="cu-form-group back ">
+				<view class="title ">折扣活动：</view>
 			</view>
 			<view class="cu-form-group ">
-				<view class="title"><span style="color: red;padding-right: 5px;">*</span> 登陆账号：</view>
-				<input  name="input" v-model="list.heightAmout"></input>
+				<view class="title"><span style="color: red;padding-right: 5px;">*</span> 订单满：</view>
+				<input name="input" v-model="list.amout"></input>元可参与
+				<input name="input" v-model="list.discount"></input>
+				<view class="title"><span style="color: red;padding-right: 5px;">*</span>折活动</view>
 			</view>
 			<view class="cu-form-group ">
-				<view class="title"><span style="color: red;padding-right: 5px;">*</span> 员工角色：</view>
-				<view class="uni-list-cell-db">
-					<picker @change="bindPickerRoleChange" :value="role" :range="roleArray" range-key="name">
-						<view class="uni-input">{{role}}</view>
-					</picker>
-				</view>
+				<view class="title"><span style="color: red;padding-right: 5px;">*</span> 单笔最高优惠：</view>
+				<input  name="input" v-model="list.heightAmout"></input>元
+			</view>
+			<view class="cu-form-group ">
+				<view class="title"><span style="color: red;padding-right: 5px;">*</span> 每日优惠订单数：</view>
+				<input  name="input" v-model="list.orderCount"></input>笔
 			</view>
 			<view class="cu-form-group back ">
-				<view class="title ">角色对应的权限：</view>
+				<view class="title ">使用范围：</view>
 			</view>
-		<view style="height: 280px;overflow: auto;">
-			<checkbox-group class="block" @change="CheckboxChange">
-				<view class="cu-form-group">
-					<view class="title">订单收款</view>
-					<checkbox class='round' :class="checkbox[0].checked?'checked':''" :checked="checkbox[0].checked?true:false" value="A"></checkbox>
+			<view class="cu-form-group ">
+				<view class="title"><span style="color: red;padding-right: 5px;">*</span> 同一用户优惠次数：</view>
+				<view class="uni-list-cell-db">
+					<picker @change="bindPickerChange" :value="index" :range="array" range-key="name">
+						<view class="uni-input">{{index}}</view>
+					</picker>
 				</view>
-				<view class="cu-form-group">
-					<view class="title">交易记录查询(收银员)</view>
-					<checkbox class='round' :class="checkbox[1].checked?'checked':''" :checked="checkbox[1].checked?true:false" value="B"></checkbox>
+				<!-- <span>^</span> -->
+				<input placeholder="最大设置999999" name="input" v-model="list.address"></input>次
+			</view>
+			<view class="cu-form-group ">
+				<view class="title"><span style="color: red;padding-right: 5px;">*</span> 活动日期：</view>
+				<view class="time" >
+					<view class="biao_05_2"> 
+						<view class="uni-list-cell-db">
+							<picker mode="date" :value="date"  @change="bindDateChange" style="margin-top: 6px;">
+								<view class="uni-input timeColor">{{date}}</view>
+							</picker>
+						</view>
+					</view>
+					<view class="biao_05_2" style="margin: 10upx 10px 0 0;">--</view>
+					<view class="uni-list-cell-db">
+						<picker mode="date" :value="date_close"  @change="bindDateChange_close" style="margin-top: 6px;">
+							<view class="uni-input timeColor">{{date_close}}</view>
+						</picker>
+					</view>
 				</view>
-				<view class="cu-form-group">
-					<view class="title">交易记录查询(管理人员)</view>
-					<checkbox class='round' :class="checkbox[2].checked?'checked':''" :checked="checkbox[2].checked?true:false" value="C"></checkbox>
+			</view>
+			<view class="cu-form-group ">
+				<view class="title"><span style="color: red;padding-right: 5px;">*</span> 每日优惠时段：</view>
+				<view class="time" >
+					<view class="biao_05_2"> 
+						<view class="uni-list-cell-db">
+							<picker mode="time" :value="time"  @change="bindTimeChange" style="margin-top: 6px;">
+								<view class="uni-input timeColor">{{time}}</view>
+							</picker>
+						</view>
+					</view>
+					<view class="biao_05_2" style="margin: 10upx 10px 0 0;">--</view>
+					<view class="uni-list-cell-db">
+						<picker mode="time" :value="time_close"  @change="bindTimeChange_close" style="margin-top: 6px;">
+							<view class="uni-input timeColor">{{time_close}}</view>
+						</picker>
+					</view>
 				</view>
-				<view class="cu-form-group">
-					<view class="title">智慧餐厅</view>
-					<checkbox class='round' :class="checkbox[3].checked?'checked':''" :checked="checkbox[3].checked?true:false" value="D"></checkbox>
+			</view>
+			
+		<!-- 	<view class="cu-form-group" @click="biaozu">
+				<view class="title">标注位置：</view>
+				<input :placeholder="address" name="input" disabled></input>
+				<text v-if="!address" class='cuIcon-locationfill text-orange'></text>
+			</view> -->
+			<!-- <view class="cu-form-group ">
+				<view class="title"><span style="color: red;padding-right: 5px;">*</span>店铺电话：</view>
+				<input placeholder="请输入" name="input" v-model="list.shop_phone"></input>
+			</view> -->
+			<!-- <view class="cu-form-group ">
+				<view class="title">购买须知：</view>
+			</view>
+			<view class="cu-form-group">
+				<textarea maxlength="-1" :disabled="modalName!=null" @input="textareaAInput" placeholder="请输入购买须知"></textarea>
+			</view> -->
+		<!-- 	<view class="cu-form-group ">
+				<view class="title">是否营业：</view>
+				<view class="title" >
+					<switch @change="SwitchA" :class="switchA?'checked':''"  :checked="switchA?true:false" color="#e54d42"></switch> 
 				</view>
-				<view class="cu-form-group">
-					<view class="title">退款审核</view>
-					<checkbox class='round' :class="checkbox[4].checked?'checked':''" :checked="checkbox[4].checked?true:false" value="E"></checkbox>
-				</view>
-				<view class="cu-form-group">
-					<view class="title">会员管理</view>
-					<checkbox class='round' :class="checkbox[5].checked?'checked':''" :checked="checkbox[5].checked?true:false" value="F"></checkbox>
-				</view>
-				<view class="cu-form-group">
-					<view class="title">店员管理</view>
-					<checkbox class='round' :class="checkbox[6].checked?'checked':''" :checked="checkbox[6].checked?true:false" value="G"></checkbox>
-				</view>
-				<view class="cu-form-group">
-					<view class="title">店铺管理</view>
-					<checkbox class='round' :class="checkbox[7].checked?'checked':''" :checked="checkbox[7].checked?true:false" value="H"></checkbox>
-				</view>
-				<view class="cu-form-group">
-					<view class="title">经营分析</view>
-					<checkbox class='round' :class="checkbox[8].checked?'checked':''" :checked="checkbox[8].checked?true:false" value="I"></checkbox>
-				</view>
-				<view class="cu-form-group">
-					<view class="title">云喇叭</view>
-					<checkbox class='round' :class="checkbox[9].checked?'checked':''" :checked="checkbox[9].checked?true:false" value="J"></checkbox>
-				</view>
-			</checkbox-group>
-		</view>
+			</view> -->
+		<view style="height: 80px;"></view>
 		<view class="p_btn">
 			<view class=" flex flex-direction">
-				<button @click="sub()" class="cu-btn bg-blue margin-tb-sm lg">新增员工</button>
+				<button @click="sub()" class="cu-btn bg-blue margin-tb-sm lg">发布活动</button>
 			</view>
 		</view> 
 	</view>
@@ -88,49 +116,24 @@
 					{startTime: '2019-12-11 20:15:35'},
 					{endTime: '2020-02-05 13:09:42'}
 				],
-				checkbox: [{
-					value: 'A',
-					checked: true
-				}, {
-					value: 'B',
-					checked: true
-				}, {
-					value: 'C',
-					checked: false
-				},{
-					value: 'D',
-					checked: true
-				}, {
-					value: 'E',
-					checked: true
-				}, {
-					value: 'F',
-					checked: false
-				},{
-					value: 'G',
-					checked: false
-				},{
-					value: 'H',
-					checked: true
-				}, {
-					value: 'I',
-					checked: true
-				}, {
-					value: 'J',
-					checked: false
-				}],
+				startTime: '开始时间',
+				endTime: '结束时间',
+				address: '',
+				time: '开始时段',
+				time_close: '结束时段',
+				date: '开始日期',
+				date_close: '结束日期',
 				showPicker: true,
+				datetime: '2019/01/01 15:00:12',
 				range: ['2019/01/01','2019/01/06'],
 				rangetime: ['2019/01/08 14:00','2019/01/16 13:59'],
 				type: 'rangetime',
 				value: '12312321',
-				role: '收银员',
 				show: false,
 				input: '',
 				index: '活动期间内',
 				rangKey: 'name',
 				array: [{name:'每月'},{name: '每周'}, {name:'每日'}, {name:'活动期间内'}],
-				roleArray: [{name:'店长'},{name: '财务'}, {name:'收银员'}, {name:'线上商户'}],
 				mode: 'selector',
 				range: ['一', '片', '冰', '心', '在', '玉', '壶'],
 				defaultTime: '2019-12-11 20:15:35',
@@ -165,22 +168,6 @@
 		methods: {
 			bindPickerChange: function(e) {
 				this.index =  this.array[e.detail.value].name
-			},
-			bindPickerRoleChange: function(e) {
-				this.role =  this.roleArray[e.detail.value].name
-			},
-			CheckboxChange(e) {
-				var items = this.checkbox,
-					values = e.detail.value;
-				for (var i = 0, lenI = items.length; i < lenI; ++i) {
-					items[i].checked = false;
-					for (var j = 0, lenJ = values.length; j < lenJ; ++j) {
-						if (items[i].value == values[j]) {
-							items[i].checked = true;
-							break
-						}
-					}
-				}
 			},
 			TimeChange(e) {
 				this.time = e.detail.value
@@ -231,6 +218,11 @@
 					//原始的Date对象
 					console.log('date => ' + e.date);
 				}
+			},
+			addCancel(){
+				uni.navigateTo({
+					url: '/pages/user/shopStore/editStore',
+				});
 			},
 			bindDateChange: function(e) {
 				this.date = e.target.value
@@ -416,7 +408,7 @@
 			bottom: 0;
 			width: 100%;
 			z-index: 99;
-			margin-bottom: 15%;
+			margin-bottom: 30%;
 		}
 
         .start{

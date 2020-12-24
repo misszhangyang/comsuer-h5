@@ -372,6 +372,18 @@
 				"app-plus":{"titleNView": false}
 			}
         }
+        ,{
+            "path" : "pages/user/shopStore/shopStore",
+            "style" : {
+				"app-plus":{"titleNView": false}
+			}
+        }
+        ,{
+            "path" : "pages/user/shopStore/editStore",
+            "style" : {
+				"app-plus":{"titleNView": false}
+			}
+        }
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",

@@ -170,7 +170,7 @@
 					{
 						title: '店铺信息',
 						img: require("@/imgs/tj.png"),
-						url: "/pages/user/agent/agent",
+						url: "/pages/user/shopStore/shopStore",
 						detail: '查看店铺信息',
 						hotImg:'https://cdn.uviewui.com/uview/grid/hot6.png'
 						

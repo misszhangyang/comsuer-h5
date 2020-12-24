@@ -14,12 +14,16 @@ import cuCustom from './colorui/components/cu-custom.vue'  //菜单栏头部组�
 import addressPicker from './colorui/components/address-picker.vue'  //地址选择组件
 import uniSearchBar from './components/uni-searchbar/uni-searchbar'  //搜素框组件
 import uniSentedControl from './components/uni/uni-segmented-control/uni-segmented-control.vue' //分段框选择器组件
+import uniSection from './components/uni/uni-section/uni-section.vue' //列表选择组件
+
 
 
 Vue.component('cu-custom',cuCustom)
 Vue.component('address-picker',addressPicker)
 Vue.component('uni-search-bar',uniSearchBar)
 Vue.component('uni-segmented-control',uniSentedControl)
+Vue.component('uni-section',uniSection)
+
 
 
 

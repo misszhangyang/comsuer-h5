@@ -42,7 +42,6 @@
 				this.searchVal = res.value
 			},
 			addCancel(){
-				alert("点击了新增员工")
 				uni.navigateTo({
 					url: '/pages/user/staffManage/addSatff',
 				});

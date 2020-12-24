@@ -2,14 +2,14 @@
 	<view>
 		<!-- grace filter start -->
 		<view class="grace-filter" :style="{'position': fixed?'fixed':'relative','top':top}" id="grace-filter-header">
-			<view class="items"style="width: 33%;height: 60px;display: inline-block; text-align: center;" :class="activeIndex==index?'text-red':'text-grey'" v-for="(item, index) in filters" :key="index" 
+			<view class="items"style="width: 33%;height: 50px;display: inline-block; text-align: center;" :class="activeIndex==index?'text-red':'text-grey'" v-for="(item, index) in filters" :key="index" 
 				:data-index="index" @tap="changeSort">
-				<text class="text-df" v-if="item.filterType!=2">{{ item.title }}</text>
-				<text class="text-df" v-else>{{ activeOption && activeOption.name || item.title }}</text>
+				<text class="text-df text"  v-if="item.filterType!=2">{{ item.title }}</text>
+				<text class="text-df" style="padding-left: 20%;" v-else>{{ activeOption && activeOption.name || item.title }}</text>
 				<text class="grace-iconfont icon-arrow-down" v-if="item.filterType==2"></text>
 				<text class="grace-iconfont" v-else-if="item.filterType==0"></text>
-				<image class="img" src="/static/img/sort0.png" mode="widthFix" v-else-if="activeIndex!=index"></image>
-				<image class="img" src="/static/img/sort2.png" mode="widthFix" v-else-if="activeIndex==index && activeAscState"></image>
+				<image class="img " style="float: right;" src="/static/img/sort0.png" mode="widthFix" v-else-if="activeIndex!=index"></image>
+				<image class="img"  src="/static/img/sort2.png" mode="widthFix" v-else-if="activeIndex==index && activeAscState"></image>
 				<image class="img" src="/static/img/sort1.png" mode="widthFix" v-else-if="activeIndex==index"></image>
 			</view>
 		<!-- 	<view class="text-xxl padding-lr margin-top-sm"  @tap="changeShape" v-if="showShape">
@@ -164,8 +164,30 @@ export default {
 .grace-filter-top{
     top:44px;
 }
+.text{
+	display: block;
+	float: left;
+	margin-left: 25%;
+	/* top: 23%; */
+	margin-top: 13%
+}
 .img{
-	padding-top: 10%;
+	/* margin-right: 26%; */
+	/* margin-top: 5%; */
+	width: 48px;
+	height: 48px;
+}
+.text-right{
+	display: block;
+	float: left;
+	/* top: 23%; */
+	margin-top: 13%;
+	padding-left: 24%;
+}
+.img-right{
+	/* margin-right: 26%; */
+	float: right;
+	/* margin-top: 5%; */
 	width: 48px;
 	height: 48px;
 }
