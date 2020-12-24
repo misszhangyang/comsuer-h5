@@ -36,10 +36,10 @@
 					</view>
 				</view>
 			</view>
-			<view class="cu-form-group" style="height: 150px; overflow: auto">
-				<view class="title" style="width: 30%;position: fixed;">提供服务：</view>
+			<view class="cu-form-group" style="height: 120px; overflow: auto">
+				<view class="title" style="width: 35%;">提供服务：</view>
 				<!-- <view class="uni-title uni-common-mt">不同颜色和尺寸的checkbox</view> -->
-				<checkBoxGroup style="width: 80%;margin-left: 20%;">
+				<checkBoxGroup style="width: 80%;">
 				 	<label class="label">
 						<u-checkbox   v-model="checked1"  :label-disabled="false" :disabled="false" color="#FFCC33" style="transform:scale(0.7)" />WIFI
 					</label>
@@ -75,20 +75,27 @@
 				<view class="title ">其他信息：</view>
 			</view>
 			<view class="cu-form-group ">
-				<view class="title ">店铺logo：</view>
-				<htz-image-upload :max="9" name="file" :chooseNum="9"  v-model="imageData" @chooseSuccess="ceshiChooseSuccess"></htz-image-upload>
+				<view class="title " style="height: 60%; font-size: 15px;">店铺LOGO：
+					<text style="font-size: 10px">(请上传一张店主与商店合影的照片,格式支持jpg,png。大小在10M以内)</text>
+				</view>
+				<htz-image-upload :max="1" name="file" :chooseNum="1"  v-model="imageData" @chooseSuccess="ceshiChooseSuccess"></htz-image-upload>
 			</view>
 			<view class="cu-form-group ">
-				 
+				 <view class="title" style="height: 150px; font-size: 15px; width: 40%;">详情照片：
+				    <text style="font-size: 10px">格式支持jpg,png,大小在10M以内</text>
+				 </view>
+				 <view style="height: 180px;  width: 60%;">
+					 <htz-image-upload :max="4" name="file" :chooseNum="4"  v-model="imageData1" @chooseSuccess="ceshiChooseSuccess1"></htz-image-upload>
+				 </view>
 			</view>
 		<view style="height: 80px;">
 			
 		</view>
-		<!-- <view class="p_btn">
+		<view class="p_btn">
 			<view class=" flex flex-direction">
-				<button @click="sub()" class="cu-btn bg-blue margin-tb-sm lg">发布活动</button>
+				<button @click="sub()" class="cu-btn bg-blue margin-tb-sm lg">提交审核</button>
 			</view>
-		</view> -->
+		</view>
 	</view>
 </template>
 
@@ -105,6 +112,9 @@
 			return {
 				content: [],
 				imageData: [
+				
+				],
+				imageData1: [
 				
 				],
 				list:[
@@ -177,65 +187,61 @@
 				/****************
 				以下代码是自定义上传逻辑，仅供参考
 				***************/
-				this.imgUpload(tempFilePaths);
+				this.imgUpload(tempFilePaths,0);
 				/*******************************/
 			},
 			
-			imgUpload(tempFilePaths) {
+			ceshiChooseSuccess1(tempFilePaths) { //选择图片返回
+				console.log('ceshiChooseSuccess', tempFilePaths);
+				/****************
+				以下代码是自定义上传逻辑，仅供参考
+				***************/
+				this.imgUpload(tempFilePaths,1);
+				/*******************************/
+			},
+			
+			imgUpload(tempFilePaths,indexImg) {
 				uni.showLoading({
 					title: '上传中'
 				});
-				debugger
 				console.log('imgUpload', tempFilePaths)
 				let uploadImgs = [];
 				var _self = this;
-				uni.chooseImage({
-				   count: 1,
-				   // sizeType: ['original', 'compressed'], //可以指定是原图还是压缩图，默认二者都有
-				   sourceType: ['album'], //从相册选择
-				   success: function (res) {
-					const tempFilePaths = res.tempFilePaths;
-					_self.imageData = tempFilePaths[0];
-					console.log("tempFilePaths[0]",tempFilePaths[0])  //能够打印出选中的图片
-					// _self.iconcheck = 1;//点击后图片更改状态由0变成1
-				   },
-				   error : function(e){
-					console.log(e);
-				   }
-				 });
-				// tempFilePaths.forEach((item, index) => {
-				// 	uploadImgs.push(new Promise((resolve, reject) => {
-				// 		console.log(index, item)
-				// 		uni.uploadFile({
-				// 			url: "http://59.110.49.173:8001/api/common/uploadImg?dir=ad", //仅为示例，非真实的接口地址
-				// 			filePath: item,
-				// 			name: 'file',
-				// 			success: (uploadFileRes) => {
-				// 				console.log('uploadFileRes', uploadFileRes)
-				// 				resolve(uploadFileRes);
-				// 				var _res = JSON.parse(uploadFileRes.data);
-				// 				if (_res.code == 200) {
-				// 					this.imageData.push('http://59.110.49.173:8001' + _res.result);
-				// 				}
-				// 			},
-				// 			fail: (err) => {
-				// 				// console.log(err);
-				// 				// reject(err);
-				// 				this.imageData.push('http://59.110.49.173:8001' + tempFilePaths );
-				// 			},
-				// 			complete: () => {
-				// 				//uni.hideLoading();
-				// 			}
-				// 		});
-				// 	}))
-				// })
-				// Promise.all(uploadImgs) //执行所有需请求的接口
-				// 	.then((results) => {
-				// 		uni.hideLoading();
-				// 	})
-				// 	.catch((res, object) => {
-				// 		uni.hideLoading();
-				// 	});
+				tempFilePaths.forEach((item, index) => {
+					uploadImgs.push(new Promise((resolve, reject) => {
+						console.log(index, item)
+						uni.uploadFile({
+							url: "http://59.110.49.173:8001/api/common/uploadImg?dir=ad", //仅为示例，非真实的接口地址
+							filePath: item,
+							name: 'file',
+							success: (uploadFileRes) => {
+								console.log('uploadFileRes', uploadFileRes)
+								resolve(uploadFileRes);
+								var _res = JSON.parse(uploadFileRes.data);
+								if (_res.code == 200 && indexImg === 0) {
+									this.imageData.push('http://59.110.49.173:8001' + _res.result);
+								}
+								if (_res.code == 200 && indexImg === 1) {
+									this.imageData1.push('http://59.110.49.173:8001' + _res.result);
+								}
+							},
+							fail: (err) => {
+								console.log(err);
+								reject(err);
+							},
+							complete: () => {
+								//uni.hideLoading();
+							}
+						});
+					}))
+				})
+				Promise.all(uploadImgs) //执行所有需请求的接口
+					.then((results) => {
+						uni.hideLoading();
+					})
+					.catch((res, object) => {
+						uni.hideLoading();
+					});
 			},
 			bindPickerChange: function(e) {
 				this.index =  this.array[e.detail.value].name
@@ -406,6 +412,12 @@
 		.pic {
 			padding: 20upx 10upx;background-color: #fff;
 		}
+		
+		.flex-direction{
+			bottom: 0px;
+			position: fixed;
+			width: 100%;
+		 }
 		
 		.biao_12 {
 			padding: 10px 10px 0;font-size: 16px;

@@ -183,10 +183,10 @@
 			},
 			// 排序，筛选更改
 			goodsFilterChanged(filter){
-				debugger
+				// debugger
 				console.log("filter:",filter)
 				// 此处可根据fitler数据，从服务器端加载数据
-				pageIndex = 0;
+				// pageIndex = 0;
 				this.isEnd = false;
 				this.loadingType = 0;
 				this.curCateFid=filter.option || ""

@@ -71,7 +71,7 @@
         },
         "domain" : "106.13.108.254",
         "devServer" : {
-            "https" : true
+            "https" : false
         }
     }
 }
