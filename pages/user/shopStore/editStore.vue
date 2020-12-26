@@ -82,7 +82,7 @@
 			</view>
 			<view class="cu-form-group ">
 				 <view class="title" style="height: 150px; font-size: 15px; width: 40%;">详情照片：
-				    <text style="font-size: 10px">格式支持jpg,png,大小在10M以内</text>
+				    <text style="font-size: 10px">可上传4张格式支持jpg,png,大小在10M以内</text>
 				 </view>
 				 <view style="height: 180px;  width: 60%;">
 					 <htz-image-upload :max="4" name="file" :chooseNum="4"  v-model="imageData1" @chooseSuccess="ceshiChooseSuccess1"></htz-image-upload>

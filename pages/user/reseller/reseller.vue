@@ -178,7 +178,7 @@
 					{
 						title: '经营分析',
 						img: require("@/imgs/q.png"),
-						url: "/pages/user/mingxi/mingxi",
+						url: "/pages/user/busAnalsis/busAnalysis",
 						detail: '查看经营分析',
 						hotImg:'https://cdn.uviewui.com/uview/grid/hot6.png'
 					},

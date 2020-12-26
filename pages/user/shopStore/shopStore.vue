@@ -9,113 +9,118 @@
 				<view class="title" style="flex-grow: 1;">{{content.shop_name}}</view> -->
 			</view>
 			<view class="cu-form-group back ">
-				<view class="title ">折扣活动：</view>
+				<view class="title ">基本信息：</view>
 			</view>
 			<view class="cu-form-group ">
-				<view class="title"><span style="color: red;padding-right: 5px;">*</span> 订单满：</view>
-				<input name="input" v-model="list.amout"></input>元可参与
-				<input name="input" v-model="list.discount"></input>
-				<view class="title"><span style="color: red;padding-right: 5px;">*</span>折活动</view>
+				<view class="title"><span style="color: red;padding-right: 5px;">*</span> 商家简称：</view>
+				<input name="input" v-model="list.amout" disabled="true">{{shopName}}</input>
 			</view>
 			<view class="cu-form-group ">
-				<view class="title"><span style="color: red;padding-right: 5px;">*</span> 单笔最高优惠：</view>
-				<input  name="input" v-model="list.heightAmout"></input>元
+				<view class="title"><span style="color: red;padding-right: 5px;">*</span> 座机号码：</view>
+				<input name="input" v-model="list.amout" disabled="true">{{fixTel}}</input>
 			</view>
 			<view class="cu-form-group ">
-				<view class="title"><span style="color: red;padding-right: 5px;">*</span> 每日优惠订单数：</view>
-				<input  name="input" v-model="list.orderCount"></input>笔
+				<view class="title"><span style="color: red;padding-right: 5px;">*</span> 手机号码：</view>
+				<input name="input" v-model="list.amout" disabled="true">{{phoneTel}}</input>
+			</view>
+			<view class="cu-form-group ">
+				<view class="title"><span style="color: red;padding-right: 5px;">*</span> 营业时间：</view>
+				<input  name="input" v-model="list.heightAmout" disabled="true">{{startTime}}-{{endTime}}</input>
+			</view>
+			<view class="cu-form-group ">
+				<view class="title"><span style="color: red;padding-right: 5px;">*</span> 提供服务：</view>
+				<view style="width: 60%;">
+					<label v-for="item in serviceList" style="text-align:center;" v-if="hidden" class="label">
+						<u-checkbox   v-model="checked1"  :label-disabled="true" :disabled="true" color="#FFCC33" style="transform:scale(0.7)" />{{item.name}}
+					</label>
+				</view>
+			</view>
+			<view class="cu-form-group" style="min-height: 90px;">
+				<view class="title">商家简介：</view>
+				<textarea style="line-height: 20px;" disabled="true" v-model="shopIntroduce"></textarea>
+			    <view><text>{{shopIntroduce.length}}/200</text></view>
 			</view>
 			<view class="cu-form-group back ">
-				<view class="title ">使用范围：</view>
+				<view class="title ">商家信息：</view>
 			</view>
 			<view class="cu-form-group ">
-				<view class="title"><span style="color: red;padding-right: 5px;">*</span> 同一用户优惠次数：</view>
-				<view class="uni-list-cell-db">
-					<picker @change="bindPickerChange" :value="index" :range="array" range-key="name">
-						<view class="uni-input">{{index}}</view>
-					</picker>
-				</view>
-				<!-- <span>^</span> -->
-				<input placeholder="最大设置999999" name="input" v-model="list.address"></input>次
+				<view class="title"><span style="color: red;padding-right: 5px;">*</span> 商家标签：</view>
+				<input  name="input"  disabled="true">{{shopTag}}</input>
 			</view>
 			<view class="cu-form-group ">
-				<view class="title"><span style="color: red;padding-right: 5px;">*</span> 活动日期：</view>
-				<view class="time" >
-					<view class="biao_05_2"> 
-						<view class="uni-list-cell-db">
-							<picker mode="date" :value="date"  @change="bindDateChange" style="margin-top: 6px;">
-								<view class="uni-input timeColor">{{date}}</view>
-							</picker>
-						</view>
-					</view>
-					<view class="biao_05_2" style="margin: 10upx 10px 0 0;">--</view>
-					<view class="uni-list-cell-db">
-						<picker mode="date" :value="date_close"  @change="bindDateChange_close" style="margin-top: 6px;">
-							<view class="uni-input timeColor">{{date_close}}</view>
-						</picker>
-					</view>
-				</view>
+				<view class="title"><span style="color: red;padding-right: 5px;">*</span> 店铺LOGO：</view>
+				<img src="@/imgs/12.png" style="margin-left: 4%;margin-top: 4%;float: left;">
+			</view>
+			<view class="cu-form-group back ">
+				<view class="title ">地址信息：</view>
 			</view>
 			<view class="cu-form-group ">
-				<view class="title"><span style="color: red;padding-right: 5px;">*</span> 每日优惠时段：</view>
-				<view class="time" >
-					<view class="biao_05_2"> 
-						<view class="uni-list-cell-db">
-							<picker mode="time" :value="time"  @change="bindTimeChange" style="margin-top: 6px;">
-								<view class="uni-input timeColor">{{time}}</view>
-							</picker>
-						</view>
-					</view>
-					<view class="biao_05_2" style="margin: 10upx 10px 0 0;">--</view>
-					<view class="uni-list-cell-db">
-						<picker mode="time" :value="time_close"  @change="bindTimeChange_close" style="margin-top: 6px;">
-							<view class="uni-input timeColor">{{time_close}}</view>
-						</picker>
-					</view>
-				</view>
+				<view class="title"><span style="color: red;padding-right: 5px;">*</span> 所在城市：</view>
+				<input  name="input"  disabled="true">{{shopCity}}</input>
 			</view>
-			
-		<!-- 	<view class="cu-form-group" @click="biaozu">
-				<view class="title">标注位置：</view>
-				<input :placeholder="address" name="input" disabled></input>
-				<text v-if="!address" class='cuIcon-locationfill text-orange'></text>
-			</view> -->
-			<!-- <view class="cu-form-group ">
-				<view class="title"><span style="color: red;padding-right: 5px;">*</span>店铺电话：</view>
-				<input placeholder="请输入" name="input" v-model="list.shop_phone"></input>
-			</view> -->
-			<!-- <view class="cu-form-group ">
-				<view class="title">购买须知：</view>
+			<view class="cu-form-group ">
+				<view class="title"><span style="color: red;padding-right: 5px;">*</span> 经营地址：</view>
+				<input  name="input"  disabled="true">{{shopAddress}}</input>
 			</view>
-			<view class="cu-form-group">
-				<textarea maxlength="-1" :disabled="modalName!=null" @input="textareaAInput" placeholder="请输入购买须知"></textarea>
-			</view> -->
-		<!-- 	<view class="cu-form-group ">
-				<view class="title">是否营业：</view>
-				<view class="title" >
-					<switch @change="SwitchA" :class="switchA?'checked':''"  :checked="switchA?true:false" color="#e54d42"></switch> 
-				</view>
-			</view> -->
-		<view style="height: 80px;"></view>
-		<view class="p_btn">
-			<view class=" flex flex-direction">
-				<button @click="sub()" class="cu-btn bg-blue margin-tb-sm lg">发布活动</button>
+			<view class="cu-form-group ">
+				<view class="title"><span style="color: red;padding-right: 5px;">*</span> 店铺位置：</view>
 			</view>
-		</view> 
+			<view class="cu-form-group ">
+				<map style="width: 100%; height: 289rpx;" :latitude="latitude" :longitude="longitude" :markers="covers" @tap="openMap()"></map>
+				<!-- <view class="title"><span style="color: red;padding-right: 5px;">*</span> 店铺位置：</view> -->
+			    <!-- <view class="uni-padding-wrap">
+			    	<view style="background:#FFFFFF; padding:40rpx;">
+			    		<view class="uni-hello-text uni-center">当前位置信息</view>
+			    		<block v-if="hasLocation === true">
+			    			<view class="uni-hello-text uni-center" style="margin-top:10px;">
+			    				{{locationAddress}}
+			    			</view>
+			    			<view class="uni-h2 uni-center uni-common-mt">
+			    				<text>E: {{location.longitude[0]}}°{{location.longitude[1]}}′</text>
+			    				<text>\nN: {{location.latitude[0]}}°{{location.latitude[1]}}′</text>
+			    			</view>
+			    		</block>
+			    	</view>
+			    	<view class="uni-btn-v">
+			    		<button type="primary" @tap="chooseLocation">选择位置</button>
+			    		<button @tap="clear">清空</button>
+			    	</view>
+			    </view> -->
+			</view>
 	</view>
 </template>
 
 <script>
 	import uniIcon from "@/components/uni-icon/uni-icon.vue"
 	import wPicker from "@/components/w-picker/w-picker.vue";
+	var util = require('../../../common/util.js');
+	var formatLocation = util.formatLocation;
 	export default {
 		data() {
 			return {
+				shopName: '茶颜悦色',
+				phoneTel: '13309099090',
+				fixTel: '18899002312',
+				serviceList: [
+					{name: 'WIFI'},
+					{name: '充电宝'},
+					{name: '停车场'},
+					{name: '宝宝椅'}
+				],
+				shopIntroduce: '12313测试简介12313测试简介12313测试简介',
+				shopTag: '餐饮美食',
+				shopCity: '广东省广州市',
+				shopAddress: '广东省广州市白云区XX街道',
+				hidden: true,
+				checked1: true,
 				content: [],
 				list:[
 					{startTime: '2019-12-11 20:15:35'},
 					{endTime: '2020-02-05 13:09:42'}
 				],
+				hasLocation: false,
+				location: {},
+				locationAddress: '',
 				startTime: '开始时间',
 				endTime: '结束时间',
 				address: '',
@@ -150,7 +155,16 @@
 					city: true,
 					area: true,
 					timestamp: true
-				}
+				},
+				 current: 0,
+				latitude: 31.7335,
+				longitude: 118.1024,
+				covers: [
+				  {
+					latitude: 31.7335,//纬度，范围为-90~90，负数表示南纬
+					longitude: 118.1024,//经度，范围为-180~180，负数表示西经
+				  }
+				]
 			};
 		},
 		computed: {
@@ -160,12 +174,39 @@
 		},
 		onLoad() {
 			this.content=this.$api.json.content
+			// this.chooseLocation()
 		},
 		components: {
 			uniIcon,
 			wPicker
 		},
 		methods: {
+			 openMap() {//点击地图
+			    this.chooseLocation()
+			//       uni.openLocation({
+			
+			//       latitude: this.latitude,
+			
+			//       longitude: this.longitude,
+			
+			//       name:"马鞍山市含山县",
+			
+			//       address: "马鞍山市含山县"
+			
+			//     })
+				},
+			chooseLocation: function () {
+				uni.chooseLocation({
+					success: (res) => {
+						this.hasLocation = true,
+						this.location = formatLocation(res.longitude, res.latitude),
+						this.locationAddress = res.address
+					}
+				})
+			},
+			clear: function () {
+				this.hasLocation = false
+			},
 			bindPickerChange: function(e) {
 				this.index =  this.array[e.detail.value].name
 			},
@@ -288,6 +329,10 @@
 </script>
 
 <style lang="less">
+	.page-body-info {
+		padding-bottom: 0;
+		height: 440rpx;
+	}
 	.shop {background-color: #fff;min-height: 100vh;
 		 .uni-input {background-color: #fff;} 
 		.biao span {
@@ -313,6 +358,7 @@
 			padding-top: 5px;
 		}
 
+      
 		.biao_02 {
 			padding: 5px 10px;
 			border-bottom: 1px solid #EDEDED;
@@ -427,6 +473,7 @@
 		}
 		.back{
 			background: #eee;
+			min-height: 35px !important;
 		}
 	}
 </style>

@@ -384,6 +384,33 @@
 				"app-plus":{"titleNView": false}
 			}
         }
+        ,{
+            "path" : "pages/user/busAnalsis/transAnalysis",
+            "style" : {}
+        }
+        
+        ,{
+            "path" : "pages/user/busAnalsis/cusAnalysis",
+            "style" : {}
+        }
+        ,{
+            "path" : "pages/user/busAnalsis/sourceAnalysis",
+            "style" : {}
+        }
+        ,{
+            "path" : "pages/user/busAnalsis/busReport",
+            "style" : {}
+        }
+        ,{
+            "path" : "pages/user/busAnalsis/staffData",
+            "style" : {}
+        }
+        ,{
+            "path" : "pages/user/busAnalsis/busAnalysis",
+            "style" : {
+				"app-plus":{"titleNView": false}
+			}
+        }
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
